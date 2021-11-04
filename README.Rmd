@@ -49,10 +49,10 @@ ggplot(sf_imd_score_by_lac,
         legend.title = element_text(size = 9),
         legend.text = element_text(size = 8)) +
   geom_text_repel(
-    size = 2.5, force = 0, bg.color = "white", bg.r = 0.15,
+    size = 3.5, force = 0, bg.color = "white", bg.r = 0.15,
     aes(X, Y,
         label = 
-          str_c(asc_name, "\n",
+          str_c(ca_name, "\n",
           round(get('Index of Multiple Deprivation 2019 (IMD) Score'))))) +
   scale_fill_viridis(discrete = FALSE,
                      name = "LAC IMD score (2019)",
@@ -98,7 +98,7 @@ hex_centres <- cbind.data.frame(data.frame(gCentroid(hex, byid=TRUE),
 ggplot() +
   geom_polygon(data = hex_fortified, aes(x = long, y = lat, group = group, 
                fill = get('Index of Multiple Deprivation 2019 (IMD) Score')),
-               colour = "white") +
+               alpha = 0.8, colour = "white") +
   coord_fixed() + 
   theme_void() +
   theme(legend.position = c(0.05, 0.7),
