@@ -1,2 +1,2 @@
 # hexsheff
-Resources to help create Sheffield hexagonal cartograms
+Resources to help create hexagonal cartograms for Sheffield
