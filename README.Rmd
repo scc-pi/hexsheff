@@ -6,7 +6,7 @@ output: github_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
-library(tidyverse); library(geojsonio)
+library(tidyverse); library(sf); library(geojsonio)
 library(broom); library(rgeos) #TODO: rgeos being retired
 library(viridis); library(scales); library(ggrepel)
 
@@ -20,6 +20,54 @@ Resources to help create hexagonal cartograms for Sheffield.
 
 Choropleth maps are a great way to illustrate differences in a city. However, some of Sheffield is a part of a national park and the city's population density varies more than most cities. Typically, city sub-areas are of approximately equal population sizes, which means Sheffield sub-areas are of significantly different geographical sizes. For Sheffield choropleths, the differences in geographical sizes can detract from the main statistic of interest.
 
+```{r choropleth, echo=FALSE}
+
+# READ ------------------------------------
+
+# Read the data we want to plot by hexagon
+df_imd_score_by_lac <- read_rds(file = "data/df_imd_score_by_lac.rds")
+
+# Get the LAC boundaries
+sf_lac <- read_rds("data/sf_lac.rds") %>% 
+  select(-objectid, -ca_name, -asc_name)
+
+# TRANSFORM ------------------------------
+
+# Join the SLI data to the ASC locality boundaries
+sf_imd_score_by_lac <- left_join(sf_lac, df_imd_score_by_lac, 
+                        by = "ca_number") %>% 
+  relocate(c(X, Y), .before = geom)
+
+# PLOT -------------------------------------
+
+# Choropleth
+ggplot(sf_imd_score_by_lac, 
+       aes(fill = get('Index of Multiple Deprivation 2019 (IMD) Score'))) +
+  geom_sf(alpha = 0.8, colour = 'white', size = 0.3) +
+  theme_void() +
+  theme(legend.position = "top",
+        legend.title = element_text(size = 9),
+        legend.text = element_text(size = 8)) +
+  geom_text_repel(
+    size = 2.5, force = 0, bg.color = "white", bg.r = 0.15,
+    aes(X, Y,
+        label = 
+          str_c(asc_name, "\n",
+          round(get('Index of Multiple Deprivation 2019 (IMD) Score'))))) +
+  scale_fill_viridis(discrete = FALSE,
+                     name = "LAC IMD score (2019)",
+                     direction = -1,
+                     labels = function(x) round(x, digits = 0),
+                     guide = guide_colourbar(
+                       direction = "horizontal",
+                       barheight = unit(2, units = "mm"),
+                       barwidth = unit(50, units = "mm"),
+                       draw.ulim = F,
+                       title.position = 'top',
+                       title.hjust = 0.5,
+                       label.hjust = 0.5))
+```
+
 Hexagonal cartograms, or "hex maps", are one alternative to choropleths. They can still provide an indication of location, but mute differences in geographical size.
 
 ```{r hexmap, echo=FALSE}
@@ -28,9 +76,6 @@ Hexagonal cartograms, or "hex maps", are one alternative to choropleths. They ca
 
 # Read the hexagon descriptions
 hex <- geojson_read("data/lac-asc-hex.geojson", what="sp")
-
-# Read the data we want to plot by hexagon
-df_imd_score_by_lac <- read_rds(file = "data/df_imd_score_by_lac.rds")
 
 # TRANSFORM ------------------------------
 
@@ -49,6 +94,7 @@ hex_centres <- cbind.data.frame(data.frame(gCentroid(hex, byid=TRUE),
 
 # PLOT -------------------------------------
 
+# Hex map
 ggplot() +
   geom_polygon(data = hex_fortified, aes(x = long, y = lat, group = group, 
                fill = get('Index of Multiple Deprivation 2019 (IMD) Score')),
@@ -64,7 +110,7 @@ ggplot() +
         label = str_c(ca_name, "\n",
                       round(get('Index of Multiple Deprivation 2019 (IMD) Score'))))) +
   scale_fill_viridis(discrete = FALSE,
-                     name = "IMD score (2019)",
+                     name = "LAC IMD score (2019)",
                      direction = -1,
                      labels = function(x) round(x, digits = 0),
                      guide = guide_colourbar(
@@ -75,7 +121,6 @@ ggplot() +
                        title.position = 'top',
                        title.hjust = 0.5,
                        label.hjust = 0.5))
-
 ```
 
 ODI Leeds have done some interesting work on [hex maps](https://open-innovations.org/blog/2017-05-08-mapping-election-with-hexes).

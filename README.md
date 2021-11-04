@@ -13,6 +13,8 @@ Sheffield sub-areas are of significantly different geographical sizes.
 For Sheffield choropleths, the differences in geographical sizes can
 detract from the main statistic of interest.
 
+![](README_files/figure-gfm/choropleth-1.png)<!-- -->
+
 Hexagonal cartograms, or “hex maps”, are one alternative to choropleths.
 They can still provide an indication of location, but mute differences
 in geographical size.
