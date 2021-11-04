@@ -1,33 +1,38 @@
-Untitled
+hexsheff
 ================
 
-## GitHub Documents
+Resources to help create hexagonal cartograms for Sheffield.
 
-This is an R Markdown format used for publishing markdown documents to
-GitHub. When you click the **Knit** button all R code chunks are run and
-a markdown file (.md) suitable for publishing to GitHub is generated.
+## Hex maps vs choropleths
 
-## Including Code
+Choropleth maps are a great way to illustrate differences in a city.
+However, Sheffield includes a part of a national park and the city’s
+population density varies more than most cities. Typically, city
+sub-areas are of approximately equal population sizes, which means
+Sheffield sub-areas are of significantly different geographical sizes.
+For Sheffield choropleths, this means the differences in geographical
+sizes can detract from the main statistic of interest.
 
-You can include R code in the document as follows:
+Hexagonal cartograms, or “hex maps”, are one alternative to choropleths.
+They can still provide and indication of location, but mute differences
+in geographical size.
 
-``` r
-summary(cars)
-```
+ODI Leeds have done quite a bit of [hex map
+work](https://open-innovations.org/blog/2017-05-08-mapping-election-with-hexes).
 
-    ##      speed           dist       
-    ##  Min.   : 4.0   Min.   :  2.00  
-    ##  1st Qu.:12.0   1st Qu.: 26.00  
-    ##  Median :15.0   Median : 36.00  
-    ##  Mean   :15.4   Mean   : 42.98  
-    ##  3rd Qu.:19.0   3rd Qu.: 56.00  
-    ##  Max.   :25.0   Max.   :120.00
+## Building a hex map template
 
-## Including Plots
+This was the process for creating the Local Area Committee hexes (which
+have the same boundaries as the Adult Social Care localities): 1. Drop
+the `data/lac_asc_xref.csv` file into the ODI Leeds [hex map
+builder](https://open-innovations.org/projects/hexmaps/builder.html),
+hexify, and save hexes as HexJson. 1. Drop the `data/lac_asc.hexjson`
+file into Oli Hawkins [HexJSON
+Editor](https://olihawkins.com/project/hexjson-editor/), edit, and
+download as GeoJson to file `data/lac-asc-hex.geojson`.
 
-You can also embed plots, for example:
-
-![](README_files/figure-gfm/pressure-1.png)<!-- -->
-
-Note that the `echo = FALSE` parameter was added to the code chunk to
-prevent printing of the R code that generated the plot.
+The [HexJSON
+format](https://open-innovations.org/projects/hexmaps/hexjson.html)
+defined by ODI Leeds is a great idea. However, use of the format hasn’t
+been huge, so we’ve stuck with GeoJson, which plays well with the
+ggplot2 R package.
