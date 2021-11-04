@@ -1,0 +1,8 @@
+ca_number,ca_name,asc_number,asc_name
+1,North,1,Locality 1
+2,North East,2,Locality 2
+4,East,6,Locality 6
+3,Central,5,Locality 5
+7,South,4,Locality 4
+6,South West,3,Locality 3
+5,South East,7,Locality 7
