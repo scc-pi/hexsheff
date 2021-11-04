@@ -22,8 +22,8 @@ work](https://open-innovations.org/blog/2017-05-08-mapping-election-with-hexes).
 
 ## Building a hex map template
 
-This was the process for creating the Local Area Committee hexes (which
-have the same boundaries as the Adult Social Care localities):
+The process for creating the Local Area Committee hexes (which have the
+same boundaries as the Adult Social Care localities):
 
 1.  Drop the `data/lac_asc_xref.csv` file into the ODI Leeds [hex map
     builder](https://open-innovations.org/projects/hexmaps/builder.html),
