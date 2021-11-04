@@ -17,8 +17,10 @@ Hexagonal cartograms, or “hex maps”, are one alternative to choropleths.
 They can still provide an indication of location, but mute differences
 in geographical size.
 
-ODI Leeds have done some interesting work on [hex maps
-work](https://open-innovations.org/blog/2017-05-08-mapping-election-with-hexes).
+![](README_files/figure-gfm/hexmap-1.png)<!-- -->
+
+ODI Leeds have done some interesting work on [hex
+maps](https://open-innovations.org/blog/2017-05-08-mapping-election-with-hexes).
 
 ## Building a hex map template
 

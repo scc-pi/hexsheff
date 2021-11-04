@@ -65,5 +65,5 @@ hex_centres <- cbind.data.frame(data.frame(gCentroid(hex, byid=TRUE),
 
 # WRITE ------------------------------------
 
-ggsave("plot/pop-by-asc-locality-hex.png")
+ggsave("pop-by-asc-locality-hex.png")
   
