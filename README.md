@@ -28,7 +28,7 @@ maps](https://open-innovations.org/blog/2017-05-08-mapping-election-with-hexes).
 
 Once a template for Sheffield sub-area hexagons is defined, e.g. by a
 GeoJson file, it can be reused to illustrate different statistics. The
-process for creating the LACs (Local Area Committee) hexagons was:
+process for creating the LAC (Local Area Committee) hexagons was:
 
 1.  Drop the `data/lac_asc_xref.csv` file into the ODI Leeds [hex map
     builder](https://open-innovations.org/projects/hexmaps/builder.html),
@@ -52,8 +52,8 @@ So far, this repository includes a hex map for LACs:
 `data/lac-asc-hex.geojson`
 
 ASC (Adult Social Care) localities have the same boundaries as LACs. The
-LAC hex map includes ASC locality cross-references, so it can also be
-used for that purpose too.
+LAC hex map includes ASC locality cross-references, so it can be used
+for that purpose too.
 
 If hex maps prove useful, other Sheffield hex maps that could be created
 include:
