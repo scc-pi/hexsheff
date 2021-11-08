@@ -48,12 +48,12 @@ GeoJson files.
 
 ## Different Sheffield hex maps
 
-So far, this repository includes a hex map for LACs:
+So far, this repository includes a hex map definition for LACs:
 `data/lac-asc-hex.geojson`
 
 ASC (Adult Social Care) localities have the same boundaries as LACs. The
-LAC hex map includes ASC locality cross-references, so it can be used
-for that purpose too.
+LAC hex map definition includes ASC locality cross-references, so it can
+be used for that purpose too.
 
 If hex maps prove useful, other Sheffield hex maps that could be created
 include:
